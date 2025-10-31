@@ -1,9 +1,9 @@
 const CACHE_NAME = 'educenter-pro-cache-v1';
 // Define the files that make up the "app shell"
 const APP_SHELL_URLS = [
-  '/', // Caching the root is important for PWA launch
-  '/index.html', // The main app shell
-  '/logo.svg',   // The app icon
+  './', // Caching the root is important for PWA launch
+  './index.html', // The main app shell
+  './logo.svg',   // The app icon
 ];
 
 // Install event: cache the app shell
@@ -66,7 +66,7 @@ self.addEventListener('fetch', (event) => {
         // it's an SPA route that the server doesn't know about. Serve the app shell.
         if (event.request.mode === 'navigate') {
           console.log(`Service Worker: Network returned status ${networkResponse.status} for navigation. Serving index.html from cache.`);
-          const indexResponse = await cache.match('/index.html');
+          const indexResponse = await cache.match('./index.html');
           // If index.html is in the cache, return it, otherwise let the browser show the server's error page.
           return indexResponse || networkResponse; 
         }
@@ -88,7 +88,7 @@ self.addEventListener('fetch', (event) => {
         // serve the main index.html file as a fallback.
         if (event.request.mode === 'navigate') {
           console.log('Service Worker: Not in cache either. Serving index.html as fallback for offline navigation.');
-          const indexResponse = await cache.match('/index.html');
+          const indexResponse = await cache.match('./index.html');
           return indexResponse;
         }
         
